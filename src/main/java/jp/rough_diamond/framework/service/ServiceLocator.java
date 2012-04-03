@@ -81,7 +81,7 @@ public class ServiceLocator {
     	return finder;
 	}
 
-	private final static String DEFAULT_SERVICE_FINDER_NAME = "jp.rough_diamond.framework.transaction.ServiceFinder";
+	private final static String DEFAULT_SERVICE_FINDER_NAME = "jp.rough_diamond.framework.service.db.ServiceFinder";
     private static ServiceFinder defaultFinder = null;
 	static synchronized ServiceFinder getDefaultFinder() {
 		if(defaultFinder == null) {
