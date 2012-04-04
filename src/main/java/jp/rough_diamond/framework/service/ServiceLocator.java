@@ -41,7 +41,7 @@ public class ServiceLocator {
 	public static <T extends Service> T getService(Class<T> cl, String defaultClassName) {
 		Class<? extends T> defaultClass;
 		try {
-			defaultClass = (Class<? extends T>)Class.forName(defaultClassName);
+			defaultClass = (Class<? extends T>)Thread.currentThread().getContextClassLoader().loadClass(defaultClassName);
 		} catch (ClassNotFoundException e) {
 			throw new RuntimeException(e);
 		}
@@ -86,7 +86,7 @@ public class ServiceLocator {
 	static synchronized ServiceFinder getDefaultFinder() {
 		if(defaultFinder == null) {
 			try {
-				defaultFinder = (ServiceFinder)Class.forName(DEFAULT_SERVICE_FINDER_NAME).newInstance();
+				defaultFinder = (ServiceFinder)Thread.currentThread().getContextClassLoader().loadClass(DEFAULT_SERVICE_FINDER_NAME).newInstance();
 			} catch (Exception e) {
 				throw new RuntimeException(e);
 			}
